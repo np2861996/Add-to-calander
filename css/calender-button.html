@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		.calender-button .addeventatc{position: relative;padding: 10px 0 0 30px;background: transparent !important;box-shadow: none !important;font-family: "Montserrat", Sans-serif;font-size: 14px !important;font-weight: 600;line-height: 28px;fill: #00559C;color: #00559C !important;line-height: 18px;text-decoration: none;border-bottom: 1px solid;}
+		.calender-button .addeventatc .addeventatc_icon::after{background: #fff;content: "";width: 28px;height: 1.5px;position: absolute;right: -10px;bottom: -1.5px;}
+		.calender-button .addeventatc .addeventatc_icon{width: 18px;height: 18px;position: absolute;z-index: 1;left: 0;top: 10px;background: url(calender-icon.svg) no-repeat; background-size: auto;background-size: 18px 18px;}
+		#addeventatc1-office365{display: none;}
+		#addeventatc1-outlookcom{display: none;}
+		#addeventatc1-yahoo{display: none;}
+	</style>
+  </head>
+  <body>
+	<div class="calender-button">
+		<a title="Add to Calendar" class="addeventatc" data-id="XR16232342" href="https://www.addevent.com/event/XR16232342" target="_blank">Add to Calendar</a>
+		<div class="btn"><a href="'.$url.'" target="_blank">Google</a></div>
+        <div class="btn"><a href="javascript:void(0)" onclick="ict()" class="downloadICS" >Apple</a></div>
+        <div class="btn"><a href="javascript:void(0)" onclick="ict()" class="downloadICS" >Outlook</a></div>
+		<script type="text/javascript" src="https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
+	</div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  </body>
+</html>
