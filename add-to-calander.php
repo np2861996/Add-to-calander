@@ -130,83 +130,29 @@ function Make_Add_To_Calendar_link($atts)
     $ictdatetimeend = strtotime($atts["end"]);
     $ictdatetimebegin = date('m d, Y  H:i:s', $ictdatetimebegin);
     $ictdatetimeend = date('m d, Y  H:i:s', $ictdatetimeend);
-
-        
-
-    if (array_key_exists('Applectc-button', $_POST)) {
-        createicsfile(
-            $atts["name"], $atts["begin"], $atts["end"], 
-            $atts["details"], $atts["location"]
-        );
-    } else if (array_key_exists('Outlookctc-button', $_POST)) {
-        createicsfile(
-            $atts["name"], $atts["begin"], $atts["end"], 
-            $atts["details"], $atts["location"]
-        );
-    }
         
     return ' <div class="calender-button">
                         <a title="Add to Calendar" class="addeventatc" 
                         href="javascript:void(0)" >Add to Calendar</a>
                         <div class="wrap">
-                            <div class="btn"><a href="'.$url.'" 
-                            target="_blank">Google</a></div>
-                            <form method="post">
-                                <input type="submit" name="Applectc-button"
-                                        class="button ict-btn apple-bnt" 
-                                        value="Apple" />
-                                        <input type="submit" name="Outlookctc-button"
-                                        class="button ict-btn outlook-bnt" 
-                                        value="Outlook" />
-                                        
-                            </form>
-                        </div>
+                        <div class="btn"><a href="'.$url.'" target="_blank">Google</a></div>
+                        <div class="btn"><a href="javascript:void(0)" class="add_to_calander_download"
+                        data-location1="' . $atts["location"] . '" 
+                        data-description="' . $atts["details"] . '"  
+                        data-begin="' . $ictdatetimebegin . '"  
+                        data-end="' .$ictdatetimeend . '"  
+                        data-name="' . $atts["name"] . '"
+                        >Apple</a></div>
+                        <div class="btn"><a href="javascript:void(0)" class="add_to_calander_download"
+                        data-location1="' . $atts["location"] . '" 
+                        data-description="' . $atts["details"] . '"  
+                        data-begin="' . $ictdatetimebegin . '"  
+                        data-end="' .$ictdatetimeend . '"  
+                        data-name="' . $atts["name"] . '"
+                        >Outlook</a></div>
+                    </div>
                 </div>';
        
 }
 add_shortcode('add_to_calendar_link', 'Make_Add_To_Calendar_link'); 
-//Sample link, navigate to it while logged into your Google account
-//If you aren't logged in, it should redirect properly upon login
-
-/**
- * Implements createicsfile.
- * 
- * @param createicsfile $name      comment about this variable
- * @param createicsfile $datebegin comment about this variable
- * @param createicsfile $dateend   comment about this variable
- * @param createicsfile $details   comment about this variable
- * @param createicsfile $location  comment about this variable
- * 
- * @file
- *
- *                                 Description of what this
- *                                 module (or file) is doing.
- *
- * @return string
- * echo make_google_calendar_link("A Special Event", 1429518000, 1429561200, "612 
- * Wharf Ave. Hoboken, New Jersey", 
- * "Descriptions require imagination juice");
- **/
-function createicsfile($name,$datebegin,$dateend,$details,$location)
-{
-
-    include 'ICS.php';
-
-    header('Content-Type: text/calendar; charset=utf-8');
-    header('Content-Disposition: attachment; filename=invite.ics');
-        
-
-    $ics = new ICS(
-        array(
-        'location' => $location,
-        'description' => $details,
-        'dtstart' => $datebegin,
-        'dtend' => $dateend,
-        'summary' => $name
-        )
-    );
-
-        echo $ics->to_string($location);
-
-}
 ?>
