@@ -2,14 +2,13 @@
 /**
  * Plugin Name: Add to calander
  * Plugin URI: https://github.com/abcd/read-me-later
- * Description: This plugin allow you to add blog posts in read me later lists using Ajax
+ * Description: This plugin allow you to add calander events
  * Version: 1.0.0
  * Author: Nikhil Patel
  * Author URI: https://github.com/efgh/
  * License: GPL3
  */
-
- /*
+/*
 #Documentation#
 
  Add plugin and activate it.
@@ -149,4 +148,3 @@ details="description"
 
     }
     ?>
-   
