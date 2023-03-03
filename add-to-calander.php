@@ -62,7 +62,7 @@ details="description"
  
     //Call this with the shown parameters (make sure $time and $end are integers and in Unix timestamp format!)
     //Get a link that will open a new event in Google Calendar with those details pre-filled
-    function make_google_calendar_link($atts) {
+    function make_add_to_calendar_link($atts) {
         $params = array('&dates=', '/', '&details=', '&location=', '&ctz=', '&sf=true&output=xml');
         $url = 'https://www.google.com/calendar/render?action=TEMPLATE&text=';
         //$arg_list = func_get_args();
@@ -123,7 +123,7 @@ details="description"
 
        
     }
-    add_shortcode('google_calendar_link', 'make_google_calendar_link'); 
+    add_shortcode('add_to_calendar_link', 'make_add_to_calendar_link'); 
     //Sample link, navigate to it while logged into your Google account
     //If you aren't logged in, it should redirect properly upon login
     //echo make_google_calendar_link("A Special Event", 1429518000, 1429561200, "612 Wharf Ave. Hoboken, New Jersey", "Descriptions require imagination juice");
