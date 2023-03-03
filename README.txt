@@ -5,7 +5,7 @@
 
  add shortcut for button of Add to calander
  
- Example:[google_calendar_link name="A Special Event" begin="2023-07-17 16:00:00" end="2023-12-10 19:10:00" ctz="Asia/Kolkata" location="612 Wharf Ave. Hoboken, New Jersey" details="description" ]
+ Example:[google_calendar_link name="A Special Event" begin="2023-07-17 2023-03-04 07:30:00" end="2023-12-10 08:40:00" location="4RGV+WQG, Bhestan, Surat, Gujarat" details="description" ]
 
  It Contains different arguments, please follow format stictly
  
