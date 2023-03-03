@@ -66,15 +66,20 @@ details="description"
         $params = array('&dates=', '/', '&details=', '&location=', '&ctz=', '&sf=true&output=xml');
         $url = 'https://www.google.com/calendar/render?action=TEMPLATE&text=';
         //$arg_list = func_get_args();
-        $arg_list = array(0 => $atts["name"], 1 => $atts["begin"], 2 => $atts["end"], 3 => $atts["details"], 4 => $atts["location"], 5 => $atts["ctz"] );
+        $arg_list = array(0 => $atts["name"], 1 => $atts["begin"], 2 => $atts["end"], 3 => $atts["details"], 4 => $atts["location"], 5 => 'UTC' );
        // print_r($arg_list);
+
+       
         for ($i = 0; $i < count($arg_list); $i++) {
             $current = $arg_list[$i];
 
             //if(is_int($current)) {
             if($i == 1 || $i == 2)
             {    
-              $current = date('Ymd\THis',strtotime($current));
+              $current = date(strtotime($current));
+              $t = new DateTime('@' . $current, new DateTimeZone('UTC'));
+              $current = $t->format('Ymd\THis\Z');
+              unset($t);
             }
             else {
                
@@ -89,103 +94,29 @@ details="description"
         $ictdatetimebegin = date('m d, Y  H:i:s',$ictdatetimebegin);
         $ictdatetimeend = date('m d, Y  H:i:s',$ictdatetimeend);
 
-        { ?>
-            <script type="text/javascript">
-                /**
-                    * Create and download a file on click
-                    * @params {string} filename - The name of the file with the ending
-                    * @params {string} filebody - The contents of the file
-                    */
-                    function download(filename, fileBody) {
-                        var element = document.createElement('a');
-                        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileBody));
-                        element.setAttribute('download', filename);
-
-                        element.style.display = 'none';
-                        document.body.appendChild(element);
-
-                        element.click();
-
-                        document.body.removeChild(element);
-                    }
-
-                    /**
-                    * Returns a date/time in ICS format
-                    * @params {Object} dateTime - A date object you want to get the ICS format for.
-                    * @returns {string} String with the date in ICS format
-                    */
-                    function convertToICSDate(dateTime) {
-                        const year = dateTime.getFullYear().toString();
-                        const month = (dateTime.getMonth() + 1) < 10 ? "0" + (dateTime.getMonth() + 1).toString() : (dateTime.getMonth() + 1).toString();
-                        const day = dateTime.getDate() < 10 ? "0" + dateTime.getDate().toString() : dateTime.getDate().toString();
-                        const hours = dateTime.getHours() < 10 ? "0" + dateTime.getHours().toString() : dateTime.getHours().toString();
-                        const minutes = dateTime.getMinutes() < 10 ? "0" +dateTime.getMinutes().toString() : dateTime.getMinutes().toString();
-
-                        return year + month + day + "T" + hours + minutes + "00";
-                    }
-
-                    /**
-                    * Creates and downloads an ICS file
-                    * @params {string} timeZone - In the format America/New_York
-                    * @params {object} startTime - Vaild JS Date object in the event timezone
-                    * @params {object} endTime - Vaild JS Date object in the event timezone
-                    * @params {string} title
-                    * @params {string} description
-                    * @params {string} venueName
-                    * @params {string} address
-                    * @params {string} city
-                    * @params {string} state
-                    */
-                    function createDownloadICSFile(timezone, startTime, endTime, title, description, venueName ) {
-                        //body structure
-                        const icsBody = 'BEGIN:VCALENDAR\n' +
-                        'VERSION:2.0\n' +
-                        'PRODID:Calendar\n' +
-                        'CALSCALE:GREGORIAN\n' +
-                        'METHOD:PUBLISH\n' +
-                        'BEGIN:VTIMEZONE\n' +
-                        'TZID:' + timezone + '\n' +
-                        'END:VTIMEZONE\n' +
-                        'BEGIN:VEVENT\n' +
-                        'SUMMARY:' + title + '\n' +
-                        'UID:@Default\n' +
-                        'SEQUENCE:0\n' +
-                        'STATUS:CONFIRMED\n' +
-                        'TRANSP:TRANSPARENT\n' +
-                        'DTSTART;TZID=' + timezone + ':' + convertToICSDate(startTime) + '\n' +
-                        'DTEND;TZID=' + timezone + ':' + convertToICSDate(endTime)+ '\n' +
-                        'DTSTAMP:'+ convertToICSDate(new Date()) + '\n' +
-                        'LOCATION:' + venueName + '\n' +
-                        'DESCRIPTION:' + description + '\n' +
-                        'END:VEVENT\n' +
-                        'END:VCALENDAR\n';
-
-                        download(title + '.ics', icsBody);
-                    }
-
-                    function ict() {
-                    //document.getElementById('downloadICS').addEventListener('click', () => {
-                        createDownloadICSFile(
-                            "<?php echo  $atts["ctz"] ?> ",
-                            new Date( " <?php echo  $ictdatetimebegin ?> "),
-                            new Date(" <?php echo  $ictdatetimeend ?> "),
-                            "<?php echo  $atts["name"] ?> ",
-                            "<?php echo  $atts["details"] ?> ",
-                            "<?php echo  $atts["location"] ?> "
-                        );  
-                    };
         
-            </script>
-        
-            <?php
+
+        if(array_key_exists('Applectc-button', $_POST)) {
+            createicsfile($atts["name"],$atts["begin"],$atts["end"],$atts["details"], $atts["location"],$atts["ctz"]);
+        } else if(array_key_exists('Outlookctc-button', $_POST)) {
+            createicsfile($atts["name"],$atts["begin"],$atts["end"],$atts["details"], $atts["location"],$atts["ctz"]);
         }
+       
+        
 
+       
+        
         return ' <div class="calender-button">
                         <a title="Add to Calendar" class="addeventatc" href="javascript:void(0)" >Add to Calendar</a>
                         <div class="wrap">
                             <div class="btn"><a href="'.$url.'" target="_blank">Google</a></div>
-                            <div class="btn"><a href="javascript:void(0)" onclick="ict()" class="downloadICS" >Apple</a></div>
-                            <div class="btn"><a href="javascript:void(0)" onclick="ict()" class="downloadICS" >Outlook</a></div>
+                            <form method="post">
+                                <input type="submit" name="Applectc-button"
+                                        class="button ict-btn apple-bnt" value="Apple" />
+                                        <input type="submit" name="Outlookctc-button"
+                                        class="button ict-btn outlook-bnt" value="Outlook" />
+                                        
+                            </form>
                         </div>
                 </div>';
 
@@ -196,4 +127,25 @@ details="description"
     //Sample link, navigate to it while logged into your Google account
     //If you aren't logged in, it should redirect properly upon login
     //echo make_google_calendar_link("A Special Event", 1429518000, 1429561200, "612 Wharf Ave. Hoboken, New Jersey", "Descriptions require imagination juice");
+
+
+    function createicsfile($name,$datebegin,$dateend,$details,$location){
+
+        include 'ICS.php';
+
+        header('Content-Type: text/calendar; charset=utf-8');
+        header('Content-Disposition: attachment; filename=invite.ics');
+
+        $ics = new ICS(array(
+            'location' => $location,
+            'description' => $details,
+            'dtstart' => $datebegin,
+            'dtend' => $dateend,
+            'summary' => $name
+            ));
+
+            echo $ics->to_string($location);
+
+    }
+    ?>
    

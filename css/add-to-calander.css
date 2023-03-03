@@ -10,4 +10,23 @@
 		.calender-button .btn:nth-child(1) a{background: url(../images/icon-google-t5.svg) 18px 40% no-repeat;background-size: 22px 100%;}
 		.calender-button .btn:nth-child(2) a{background: url(../images/icon-apple-t5.svg) 18px 40% no-repeat;background-size: 22px 100%;}
 		.calender-button .btn:nth-child(3) a{background: url(../images/icon-outlook-t5.svg) 18px 40% no-repeat;background-size: 22px 100%;}
-	
+
+
+		input.button.ict-btn.apple-bnt {
+			background: url(../images/icon-apple-t5.svg) 18px 40% no-repeat;
+			background-size: 22px 100%;
+		}
+		input.button.ict-btn.outlook-bnt {background: url(../images/icon-outlook-t5.svg) 18px 40% no-repeat;background-size: 22px 100%;}
+		input.button.ict-btn {
+			display: block;
+			line-height: 100%;
+			background: #fff;
+			text-decoration: none;
+			cursor: pointer;
+			font-size: 15px;
+			color: #333;
+			font-weight: 600;
+			padding: 14px 10px 20px 55px;
+			margin: -2px 0px;
+			border: none;
+		}
