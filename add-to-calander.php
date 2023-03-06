@@ -134,7 +134,7 @@ function Make_Add_To_Calendar_link($atts)
                         <div class="btn"><a href="'.$url.'" target="_blank">Google</a></div>
                         <div class="btn"><a href="javascript:void(0)" class="add_to_calander_download"
                         data-location1="' . $atts["location"] . '" 
-                        data-description="' . $atts["details"] . '"  
+                        data-details="' . $atts["details"] . '"  
                         data-begin="' . $ictdatetimebegin . '"  
                         data-end="' .$ictdatetimeend . '"  
                         data-name="' . $atts["name"] . '"
