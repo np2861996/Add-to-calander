@@ -48,10 +48,6 @@ end="2023-12-10 19:10:00" #Add only UTC Time
 
 => Add end date in same formate date 
 
-ctz="Asia/Kolkata"
-
-=> Add timezone in same formate
-
 location="612 Wharf Ave. Hoboken, New Jersey"
 
 => Add location or address
@@ -145,7 +141,7 @@ function Make_Add_To_Calendar_link($atts)
                         >Apple</a></div>
                         <div class="btn"><a href="javascript:void(0)" class="add_to_calander_download"
                         data-location1="' . $atts["location"] . '" 
-                        data-description="' . $atts["details"] . '"  
+                        data-details="' . $atts["details"] . '"  
                         data-begin="' . $ictdatetimebegin . '"  
                         data-end="' .$ictdatetimeend . '"  
                         data-name="' . $atts["name"] . '"

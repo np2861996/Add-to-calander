@@ -60,10 +60,6 @@ end="2023-12-10 19:10:00" #Add only UTC Time
 
 => Add end date in same formate date 
 
-ctz="Asia/Kolkata"
-
-=> Add timezone in same formate
-
 location="612 Wharf Ave. Hoboken, New Jersey"
 
 => Add location or address
