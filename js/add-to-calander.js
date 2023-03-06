@@ -16,7 +16,21 @@ jQuery(document).ready( function($){
 
 })
 
+
 jQuery(document).ready( function() {
+
+    function removeTags(str) {
+        if ((str===null) || (str===''))
+            return false;
+        else
+            str = str.toString();
+              
+        // Regular expression to identify HTML tags in
+        // the input string. Replacing the identified
+        // HTML tag with a null string.
+        return str.replace( /(<([^>]+)>)/ig, '');
+    }
+
     jQuery(".add_to_calander_download").click( function(e) {
        e.preventDefault(); 
        location1 = jQuery(this).attr("data-location1");
@@ -30,7 +44,7 @@ jQuery(document).ready( function() {
          new Date( begin),
          new Date(end),
          summary,
-         details,
+         removeTags(details),
          location1
      );  
 
