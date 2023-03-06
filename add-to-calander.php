@@ -101,7 +101,7 @@ function Make_Add_To_Calendar_link($atts)
     $url = 'https://www.google.com/calendar/render?action=TEMPLATE&text=';
     //$arg_list = func_get_args();
     $arg_list = array(0 => $atts["name"], 1 => $atts["begin"], 2 => $atts["end"], 
-    3 => $atts["details"], 4 => $atts["location"], 5 => 'UTC' );
+    3 => esc_html($atts["details"]), 4 => $atts["location"], 5 => 'UTC' );
     // print_r($arg_list);
 
        
@@ -134,14 +134,14 @@ function Make_Add_To_Calendar_link($atts)
                         <div class="btn"><a href="'.$url.'" target="_blank">Google</a></div>
                         <div class="btn"><a href="javascript:void(0)" class="add_to_calander_download"
                         data-location1="' . $atts["location"] . '" 
-                        data-details="' . $atts["details"] . '"  
+                        data-details="' . esc_html($atts["details"]) . '"  
                         data-begin="' . $ictdatetimebegin . '"  
                         data-end="' .$ictdatetimeend . '"  
                         data-name="' . $atts["name"] . '"
                         >Apple</a></div>
                         <div class="btn"><a href="javascript:void(0)" class="add_to_calander_download"
                         data-location1="' . $atts["location"] . '" 
-                        data-details="' . $atts["details"] . '"  
+                        data-details="' . esc_html($atts["details"]) . '"  
                         data-begin="' . $ictdatetimebegin . '"  
                         data-end="' .$ictdatetimeend . '"  
                         data-name="' . $atts["name"] . '"
