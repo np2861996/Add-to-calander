@@ -100,8 +100,10 @@ function Make_Add_To_Calendar_link($atts)
     '&ctz=', '&sf=true&output=xml');
     $url = 'https://www.google.com/calendar/render?action=TEMPLATE&text=';
     //$arg_list = func_get_args();
+    $datadetails = strip_tags($atts["details"]);
+    $datadetails = trim( $datadetails);
     $arg_list = array(0 => $atts["name"], 1 => $atts["begin"], 2 => $atts["end"], 
-    3 => esc_html($atts["details"]), 4 => $atts["location"], 5 => 'UTC' );
+    3 => strip_tags($datadetails), 4 => $atts["location"], 5 => 'UTC' );
     // print_r($arg_list);
 
        
@@ -126,6 +128,7 @@ function Make_Add_To_Calendar_link($atts)
     $ictdatetimeend = strtotime($atts["end"]);
     $ictdatetimebegin = date('m d, Y  H:i:s', $ictdatetimebegin);
     $ictdatetimeend = date('m d, Y  H:i:s', $ictdatetimeend);
+    
         
     return ' <div class="calender-button">
                         <a title="Add to Calendar" class="addeventatc" 
@@ -134,14 +137,14 @@ function Make_Add_To_Calendar_link($atts)
                         <div class="btn"><a href="'.$url.'" target="_blank">Google</a></div>
                         <div class="btn"><a href="javascript:void(0)" class="add_to_calander_download"
                         data-location1="' . $atts["location"] . '" 
-                        data-details="' . esc_html($atts["details"]) . '"  
+                        data-details="' . $datadetails . '"  
                         data-begin="' . $ictdatetimebegin . '"  
                         data-end="' .$ictdatetimeend . '"  
                         data-name="' . $atts["name"] . '"
                         >Apple</a></div>
                         <div class="btn"><a href="javascript:void(0)" class="add_to_calander_download"
                         data-location1="' . $atts["location"] . '" 
-                        data-details="' . esc_html($atts["details"]) . '"  
+                        data-details="' . $datadetails . '"  
                         data-begin="' . $ictdatetimebegin . '"  
                         data-end="' .$ictdatetimeend . '"  
                         data-name="' . $atts["name"] . '"
