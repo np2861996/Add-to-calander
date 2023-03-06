@@ -2,7 +2,9 @@ jQuery(document).ready( function($){
 
     $(function() {
         $(".calender-button a").on("click", function(e) {
-            $(".calender-button .wrap").addClass("active");
+           // $(this).parent().next(".card-reveal")
+           // $(".calender-button .wrap").addClass("active");
+           $(this).next(".wrap").addClass("active")
             e.stopPropagation()
         });
         $(document).on("click", function(e) {
