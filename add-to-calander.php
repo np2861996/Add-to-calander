@@ -100,7 +100,7 @@ function Make_Add_To_Calendar_link($atts)
     '&ctz=', '&sf=true&output=xml');
     $url = 'https://www.google.com/calendar/render?action=TEMPLATE&text=';
     //$arg_list = func_get_args();
-    $datadetails = strip_tags($atts["details"]);
+    $datadetails = sanitize_text_field($atts["details"]);
     $datadetails = trim( $datadetails);
     $arg_list = array(0 => $atts["name"], 1 => $atts["begin"], 2 => $atts["end"], 
     3 => strip_tags($datadetails), 4 => $atts["location"], 5 => 'UTC' );
